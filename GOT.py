@@ -1,48 +1,7 @@
 # Main python file for the GOT
 
 
-class edge:
-    def __init__(self, node1, node2, rel):
-        self.node1 = node1
-        self.node2 = node2
-        self.rel = rel
-        node1.add_rel(self)
-        node2.add_rel(self)
-
-    def get_node1(self):
-        return self.node1
-
-    def get_node2(self):
-        return self.node2
-
-    def get_rel(self):
-        return self.rel
-
-    def __str__(self):
-        rela = ''
-        if self.rel == False:
-            rela = 'Negative'
-        else:
-            rela = 'Positive'
-        return (self.node1.get_name() + " has a " + rela + " relationship with " + self.node2.get_name())
-
-
-class node:
-    def __init__(self, name):
-        self.name = name
-        self.rels = []
-
-    def add_rel(self, rel):
-        self.rels.append(rel)
-    
-    def get_rel(self):
-        return self.rels
-
-    def get_name(self):
-        return self.name
-
-    def __str__(self):
-        return self.name
+import graph_classes
 
 # Makes the nodes that are given in the input file
 
@@ -60,7 +19,7 @@ def make_nodes(lines):
 		character_names.append(l)
         nodes = []
         for name in character_names:
-            name = node(name)
+            name = graph_classes.node(name)
             nodes.append(name)
     return nodes
 
@@ -86,7 +45,7 @@ def relate_nodes(lines, nodes):
             line = line.split(' -- ')
         node1 = str_to_node(line[0], nodes)
         node2 = str_to_node(line[1], nodes)
-        relationships.append(edge(node1, node2, rel))
+        relationships.append(graph_classes.edge(node1, node2, rel))
 
 #  Finds the nodes that are uncommon between the two given edges
 
